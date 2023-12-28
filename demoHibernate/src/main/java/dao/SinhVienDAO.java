@@ -32,12 +32,29 @@ public class SinhVienDAO implements  InterfaceDAO<SinhVien>{
 
     @Override
     public Boolean deleteG(SinhVien sinhVien) {
-        return null;
+        try {
+            SinhVien svDAO = this.selectG(sinhVien);
+            if(svDAO != null){
+                this.entity.remove(svDAO);
+                return true;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
     public Boolean updateG(SinhVien sinhVien) {
-        return null;
+        try {
+            if(this.selectG(sinhVien) != null){
+                this.entity.merge(sinhVien);
+                return true;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
@@ -75,5 +92,27 @@ public class SinhVienDAO implements  InterfaceDAO<SinhVien>{
             e.printStackTrace();
         }
         return list;
+    }
+
+    public int updateListSVwithString(String s){
+        int i = 0;
+        try {
+            String hql = "UPDATE SinhVien sv SET sv.tuoi = 0 WHERE sv.hoTen LIKE :ten";
+            i =  entity.createQuery(hql).setParameter("ten", "%"+s+"%").executeUpdate();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+    public int removeAllTable(){
+        int i = 0;
+        try {
+            String hql = "DELETE FROM SinhVien";
+            i =  entity.createQuery(hql).executeUpdate();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return i;
     }
 }

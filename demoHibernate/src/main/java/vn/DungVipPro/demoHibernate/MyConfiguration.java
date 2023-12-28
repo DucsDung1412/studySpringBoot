@@ -62,9 +62,38 @@ public class MyConfiguration {
                     System.out.print("Ho Ten: ");
                     String hoTen = sc.nextLine();
                     List<SinhVien> list = svd.selectByTen(hoTen);
-                    for(SinhVien sv : list){
+                    list.forEach(sv -> {
                         System.out.println(sv.getHoTen());
-                    }
+                    });
+                }
+                if(i == 2){
+                    System.out.println("ID: ");
+                    String id = sc.nextLine();
+                    System.out.println("Ho Ten: ");
+                    String hoten = sc.nextLine();
+                    System.out.println("Tuoi: ");
+                    Integer tuoi = sc.nextInt();
+                    System.out.println("Email: ");
+                    sc.nextLine();
+                    String email = sc.nextLine();
+                    SinhVien sv = new SinhVien(hoten, tuoi, email);
+                    sv.setId(id);
+                    svd.updateG(sv);
+                }
+                if(i == 7){
+                    System.out.println("Ho Ten: ");
+                    String hoten = sc.nextLine();
+                    svd.updateListSVwithString(hoten);
+                }
+                if(i == 3){
+                    System.out.println("ID: ");
+                    String id = sc.nextLine();
+                    SinhVien sv = new SinhVien();
+                    sv.setId(id);
+                    svd.deleteG(sv);
+                }
+                if(i == 8){
+                    svd.removeAllTable();
                 }
             }
         };
@@ -78,6 +107,8 @@ public class MyConfiguration {
         System.out.println("4. Check List SinhVien");
         System.out.println("5. Check SinhVien with ID");
         System.out.println("6. Check SinhVien with HoTen");
+        System.out.println("7. UPDATE List SV");
+        System.out.println("8. DELETE ALL");
         System.out.println("0. QUIT");
     }
 }
