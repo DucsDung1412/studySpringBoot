@@ -39,6 +39,19 @@ public class MyConfiguration {
                     SinhVien sv = new SinhVien(hoten, tuoi, email);
                     svd.saveG(sv);
                 }
+                if(i == 5){
+                    System.out.print("Id: ");
+                    sc.nextLine();
+                    String id = sc.nextLine();
+                    SinhVien sv = new SinhVien();
+                    sv.setId(id);
+                    SinhVien svDAO = svd.selectG(sv);
+                    if(svDAO == null){
+                        System.out.println("Khong tim thay");
+                    } else {
+                        System.out.println(svDAO.toString());
+                    }
+                }
             }
         };
     }
@@ -49,6 +62,7 @@ public class MyConfiguration {
         System.out.println("2. UPDATE SinhVien");
         System.out.println("3. DELETE SinhVien");
         System.out.println("4. Check List SinhVien");
+        System.out.println("5. Check SinhVien with ID");
         System.out.println("0. QUIT");
     }
 }

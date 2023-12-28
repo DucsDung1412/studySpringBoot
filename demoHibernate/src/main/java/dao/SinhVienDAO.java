@@ -46,6 +46,12 @@ public class SinhVienDAO implements  InterfaceDAO<SinhVien>{
 
     @Override
     public SinhVien selectG(SinhVien sinhVien) {
+        try {
+            SinhVien sv = entity.find(SinhVien.class, sinhVien.getId());
+            return sv;
+        } catch(Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 }
