@@ -12,7 +12,7 @@ import java.util.List;
 @Transactional
 public class SinhVienDAO implements  InterfaceDAO<SinhVien>{
     private EntityManager entity;
-    
+
     @Autowired
     public SinhVienDAO(EntityManager entity) {
         this.entity = entity;
