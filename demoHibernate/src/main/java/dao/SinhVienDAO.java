@@ -2,6 +2,7 @@ package dao;
 
 import entity.SinhVien;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,17 +42,38 @@ public class SinhVienDAO implements  InterfaceDAO<SinhVien>{
 
     @Override
     public List<SinhVien> selectAll() {
-        return null;
+        List<SinhVien> list = null;
+        try {
+            String hql = "FROM SinhVien sv";
+            Query query = entity.createQuery(hql);
+            list = query.getResultList();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
     }
 
     @Override
     public SinhVien selectG(SinhVien sinhVien) {
+        SinhVien sv = null;
         try {
-            SinhVien sv = entity.find(SinhVien.class, sinhVien.getId());
-            return sv;
+            sv = entity.find(SinhVien.class, sinhVien.getId());
         } catch(Exception e){
             e.printStackTrace();
         }
-        return null;
+        return sv;
+    }
+
+    public List<SinhVien> selectByTen(String hoten) {
+        List<SinhVien> list = null;
+        try {
+            String hql = "FROM SinhVien sv WHERE sv.hoTen like :ten";
+            Query query = entity.createQuery(hql);
+            query.setParameter("ten", "%"+hoten+"%");
+            list = query.getResultList();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
     }
 }
