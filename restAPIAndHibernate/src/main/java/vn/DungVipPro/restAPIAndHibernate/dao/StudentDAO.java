@@ -9,7 +9,6 @@ import vn.DungVipPro.restAPIAndHibernate.entity.Student;
 import java.util.List;
 
 @Repository
-@Transactional
 public class StudentDAO implements  Interface_DAO<Student>{
     private EntityManager entityManager;
 
@@ -19,6 +18,7 @@ public class StudentDAO implements  Interface_DAO<Student>{
     }
 
     @Override
+    @Transactional
     public Boolean insertG(Student student) {
         Boolean check = false;
         try {
@@ -31,11 +31,14 @@ public class StudentDAO implements  Interface_DAO<Student>{
     }
 
     @Override
+    @Transactional
     public Boolean deleteG(Student student) {
         Boolean check = false;
         try {
-            this.entityManager.remove(student);
-            check = true;
+            if(this.selectG(student) != null){
+                this.entityManager.remove(student);
+                check = true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,6 +46,7 @@ public class StudentDAO implements  Interface_DAO<Student>{
     }
 
     @Override
+    @Transactional
     public Boolean updateG(Student student) {
         Boolean check = false;
         try {
