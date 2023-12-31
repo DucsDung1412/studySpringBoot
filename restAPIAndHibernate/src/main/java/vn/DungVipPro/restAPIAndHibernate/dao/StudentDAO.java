@@ -18,7 +18,6 @@ public class StudentDAO implements  Interface_DAO<Student>{
     }
 
     @Override
-    @Transactional
     public Boolean insertG(Student student) {
         Boolean check = false;
         try {
@@ -31,7 +30,6 @@ public class StudentDAO implements  Interface_DAO<Student>{
     }
 
     @Override
-    @Transactional
     public Boolean deleteG(Student student) {
         Boolean check = false;
         try {
@@ -46,7 +44,6 @@ public class StudentDAO implements  Interface_DAO<Student>{
     }
 
     @Override
-    @Transactional
     public Boolean updateG(Student student) {
         Boolean check = false;
         try {
