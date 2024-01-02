@@ -33,8 +33,9 @@ public class StudentDAO implements  Interface_DAO<Student>{
     public Boolean deleteG(Student student) {
         Boolean check = false;
         try {
-            if(this.selectG(student) != null){
-                this.entityManager.remove(student);
+            Student studentDAO = this.selectG(student);
+            if(studentDAO != null){
+                this.entityManager.remove(studentDAO);
                 check = true;
             }
         } catch (Exception e) {

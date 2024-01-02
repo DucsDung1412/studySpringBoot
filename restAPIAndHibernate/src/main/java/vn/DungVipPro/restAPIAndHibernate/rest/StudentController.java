@@ -38,7 +38,7 @@ public class StudentController {
         if(check){
             return ResponseEntity.status(HttpStatus.CREATED).body(student);
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @PutMapping("/{id}")
@@ -54,9 +54,22 @@ public class StudentController {
 
             Boolean check = this.service.updateG(student);
             if(check){
-                return ResponseEntity.status(HttpStatus.CREATED).body(student);
+                return ResponseEntity.status(HttpStatus.OK).body(student);
             }
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteStudent(@PathVariable Integer id){
+        Student student = new Student();
+        student.setId(id);
+        if(this.service.getG(student) != null){
+            Boolean check = this.service.deleteG(student);
+            if(check){
+                return ResponseEntity.status(HttpStatus.OK).build();
+            }
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
