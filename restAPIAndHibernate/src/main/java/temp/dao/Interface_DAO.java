@@ -1,4 +1,4 @@
-package vn.DungVipPro.restAPIAndHibernate.dao;
+package temp.dao;
 
 import java.util.List;
 

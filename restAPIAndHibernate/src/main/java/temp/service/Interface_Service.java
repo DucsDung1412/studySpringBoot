@@ -1,4 +1,4 @@
-package vn.DungVipPro.restAPIAndHibernate.service;
+package temp.service;
 
 
 import java.util.List;

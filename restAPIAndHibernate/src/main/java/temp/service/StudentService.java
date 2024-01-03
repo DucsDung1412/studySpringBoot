@@ -1,9 +1,9 @@
-package vn.DungVipPro.restAPIAndHibernate.service;
+package temp.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vn.DungVipPro.restAPIAndHibernate.dao.StudentDAO;
+import temp.dao.StudentDAO;
 import vn.DungVipPro.restAPIAndHibernate.dao.StudentRepository;
 import vn.DungVipPro.restAPIAndHibernate.entity.Student;
 

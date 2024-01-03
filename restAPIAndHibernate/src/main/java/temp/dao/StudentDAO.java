@@ -1,7 +1,6 @@
-package vn.DungVipPro.restAPIAndHibernate.dao;
+package temp.dao;
 
 import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import vn.DungVipPro.restAPIAndHibernate.entity.Student;

@@ -1,75 +1,27 @@
 package vn.DungVipPro.restAPIAndHibernate.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import vn.DungVipPro.restAPIAndHibernate.dao.Interface_DAO2;
 import vn.DungVipPro.restAPIAndHibernate.entity.Student;
-import vn.DungVipPro.restAPIAndHibernate.service.Interface_Service;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
-    private Interface_Service service;
+    private Interface_DAO2 service;
 
     @Autowired
-    public StudentController(@Qualifier("studentService") Interface_Service studentService) {
+    public StudentController(Interface_DAO2 studentService) {
         this.service = studentService;
     }
 
-    @GetMapping
-    public List<Student> getAllStudent(){
-        return this.service.getList();
-    }
-
-    @GetMapping("/{id}")
-    public Student getStudentByID(@PathVariable Integer id){
-        Student st = new Student();
-        st.setId(id);
-        return (Student)this.service.getG(st);
-    }
-
-    @PostMapping
-    public ResponseEntity<Student> addStudent(@RequestBody Student student){
-        Boolean check = this.service.addG(student);
-        if(check){
-            return ResponseEntity.status(HttpStatus.CREATED).body(student);
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable Integer id, @RequestBody Student student){
-        Student st = new Student();
-        st.setId(id);
-        if(this.service.getG(st) != null){
-            Student g = (Student) this.service.getG(st);
-            student.setId(st.getId());
-            student.setEmail(student.getEmail() == null ? g.getEmail() : student.getEmail());
-            student.setFirstName(student.getFirstName() == null ? g.getFirstName() : student.getFirstName());
-            student.setLastName(student.getLastName() == null ? g.getLastName() : student.getLastName());
-
-            Boolean check = this.service.updateG(student);
-            if(check){
-                return ResponseEntity.status(HttpStatus.OK).body(student);
-            }
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable Integer id){
-        Student student = new Student();
-        student.setId(id);
-        if(this.service.getG(student) != null){
-            Boolean check = this.service.deleteG(student);
-            if(check){
-                return ResponseEntity.status(HttpStatus.OK).build();
-            }
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    @GetMapping("/{firstName}")
+    public List<Student> getStudentByID(@PathVariable String firstName){
+        return this.service.findByFirstNameNotContains(firstName);
     }
 }
