@@ -1,10 +1,10 @@
-package vn.DungVipPro.demoThyme;
+package vn.DungVipPro.demoThymeleaf;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoThymeApplicationTests {
+class DemoThymeleafApplicationTests {
 
 	@Test
 	void contextLoads() {
