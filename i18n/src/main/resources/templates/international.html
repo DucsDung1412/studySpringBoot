@@ -6,7 +6,9 @@
 </head>
 <body>
     <h1 th:text="#{greeting}"></h1>
-    <h1><spring:message code="greeting" text="default"/></h1>
+    <h1 th:text="#{hello}"></h1>
+<!--    <h1><spring:message code="greeting" text="default"/></h1>-->
+    <a th:href="@{/change}">Change Layout</a>
     <span th:text="#{lang.change}"></span>:
     <select id="locales">
         <option value=""></option>

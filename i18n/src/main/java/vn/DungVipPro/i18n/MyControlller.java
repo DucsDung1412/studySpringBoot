@@ -9,4 +9,9 @@ public class MyControlller{
     public String getInternationalPage() {
         return "/international";
     }
+
+    @GetMapping("/change")
+    public String cahnge(){
+        return "/change";
+    }
 }

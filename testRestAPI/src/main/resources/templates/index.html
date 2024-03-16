@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>Get Student</h2>
+    <form id="updateForm">
+        <!-- Your form fields here -->
+        <input type="submit" value="Update">
+    </form><
+    <h1 class="testRestAPI"></h1>
+    <!--  JQuery  -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#updateForm').submit(function(e) {
+                e.preventDefault();
+                var data = $(this).serialize();
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/getStudents',
+                    data: data,
+                    success: function(response) {
+                        // Handle success response
+                        console.log(response);
+                        alert('Student updated successfully');
+                        // You can manipulate the returned JSON as needed
+                        $('#studentList').empty();
+                        // Loop through each element of the response array
+                        response.forEach(function(student) {
+                            // Create a new <h1> element for each student and append it to the <div id="studentList">
+                            var h1 = $('<h1>').text(JSON.stringify(student)); // Assuming student object has a 'name' property
+                            $('#studentList').append(h1);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        console.error(xhr.responseText);
+                        alert('Unable to update student');
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            $('#updateForm').submit(function(e) {
+                e.preventDefault();
+                var data = $(this).serialize();
+                var requestData1 = {
+                    id: 1,
+                    name: '1',
+                };
+                var requestData = {
+                    id: 10,
+                    name: 'Dung',
+                    school: requestData1,
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/insertStudent',
+                    contentType: "application/json",
+                    data: JSON.stringify(requestData),
+                    success: function(response) {
+                        // Handle success response
+                        console.log(response);
+                        alert('Student updated successfully');
+                        // You can manipulate the returned JSON as needed
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        console.error(xhr.responseText);
+                        alert('Unable to update student');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
