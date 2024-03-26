@@ -10,10 +10,31 @@
         <!-- Your form fields here -->
         <input type="submit" value="Update">
     </form><
-    <h1 class="testRestAPI"></h1>
+    <div class="testRestAPI"></div>
     <!--  JQuery  -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
+        // Define the API URL
+        const apiUrl = 'http://localhost:8080/api/getStudents';
+
+        // Make a GET request
+        fetch(apiUrl, {method: "GET"})
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            data.forEach(student => {
+                var textH1 = $('<h1>').text(JSON.stringify(student));
+                $('.testRestAPI').append(textH1);
+            })
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+
         $(document).ready(function() {
             $('#updateForm').submit(function(e) {
                 e.preventDefault();
