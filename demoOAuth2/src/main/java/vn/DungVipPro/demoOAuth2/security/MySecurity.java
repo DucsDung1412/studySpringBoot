@@ -37,7 +37,13 @@ public class MySecurity {
                     .successHandler((request, response, authentication) -> {
                         CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
                         String email = oAuth2User.getAttribute("email");
+                        String locale  = oAuth2User.getAttribute("locale");
+                        String given_name  = oAuth2User.getAttribute("given_name");
+                        String family_name  = oAuth2User.getAttribute("family_name");
                         System.out.println(email);
+                        System.out.println(locale);
+                        System.out.println(given_name);
+                        System.out.println(family_name);
                         response.sendRedirect(email.equals("daoducdung2000@gmail.com") == true ? "/success" : "/index");
                     });
         });
